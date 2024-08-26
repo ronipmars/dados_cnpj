@@ -1,0 +1,16 @@
+beautifulsoup4
+bs4
+greenlet
+importlib-metadata
+lxml
+numpy
+pandas
+psycopg2
+python-dateutil
+pytz
+six
+soupsieve
+SQLAlchemy
+typing-extensions
+wget
+zipp

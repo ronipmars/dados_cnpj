@@ -1,0 +1,37 @@
+
+--COPY (
+SELECT emp.cnpj_basico--, est.cnpj_ordem , est.cnpj_dv
+,  emp.razao_social --, emp.natureza_juridica, nat.descricao
+--, emp.qualificacao_responsavel, quals.descricao
+--, emp.capital_social, emp.porte_empresa, emp.ente_federativo_responsavel
+, est.nome_fantasia--, est.situacao_cadastral, est.data_situacao_cadastral
+, est.motivo_situacao_cadastral
+, est.data_inicio_atividade--, est.cnae_fiscal_principal, cnae.descricao
+--, est.cnae_fiscal_secundaria
+--, est.tipo_logradouro, est.logradouro, est.numero, est.complemento
+, est.bairro--, est.cep--, est.uf
+--, est.municipio
+, munic.descricao
+, est.ddd_1, est.telefone_1
+, est.correio_eletronico
+--, est.data_situacao_cadastral
+	FROM public.estabelecimento est 
+	left join public.empresa emp on est.cnpj_basico = emp.cnpj_basico
+	left join public.natju nat on emp.natureza_juridica = nat.codigo
+	left join public.quals quals on emp.qualificacao_responsavel = quals.codigo 
+	left join public.munic munic on munic.codigo = est.municipio
+	left join public.cnae on cnae.codigo = est.cnae_fiscal_principal
+	where 1=1
+	and est.uf = 'SP'
+	--and est.cep between '12900000' and '12999999'
+	and munic.codigo in ('6181','6241','6251','6569','6605','6611','6671','6749','6871','6873')
+	--and cnae.codigo = '6920601' --contabilidade
+	--and cnae.codigo = '8630504' -- dentista
+	--and  cnae.codigo = '0122900' -- cultivo de flores e plantas ornamentais
+	--and cnae.descricao like 'Cultivo%'
+	--and cnae.codigo = '4110700' --empreeendimento mobiliario
+	and cnae.codigo = '8630501'
+	--limit 10
+	--) TO 'D:\cnpj\listagem_primaria_cultivo_flores_email.csv' DELIMITER ';' CSV HEADER ENCODING 'latin1' ;
+	
+	
